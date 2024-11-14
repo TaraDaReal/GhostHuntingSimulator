@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         _movement.Set(InputManager.movement.x, InputManager.movement.y);
 
