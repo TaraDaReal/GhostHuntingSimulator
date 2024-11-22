@@ -13,16 +13,13 @@ public class PointToMouse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 mousePos = Input.mousePosition;
+        Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector3 difference = worldPoint - transform.position;
+        difference.Normalize();
 
-        Vector2 direction = (mousePos - transform.position).normalized;
+        float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
 
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        angle -= 90f;
-
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        transform.rotation = Quaternion.Euler(0f, 0f, rotationZ - 90);
     }
 }
